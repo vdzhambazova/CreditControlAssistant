@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Credit Control Assistant </title>
+
+    <!-- Links -->
+    <link href="bs/css/bootstrap.min.css" rel="stylesheet">
+   	<link rel="stylesheet" href=".\css\CreditControlAssistant.css">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400;300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    
+	<style>
+		 /** TABS **/
+		                 
+		.nav a {
+		  color: #fff;
+		  font-size: 14px;
+		  font-weight: bold;
+		  text-transform: uppercase;
+		}
+		
+		.nav li {
+		  display: inline;
+		}
+		
+		.dropdown:hover a{
+			color: #4f4a4a;
+		}
+		
+		 /** LINKS **/
+		              
+		.menu {
+		  right: -285px;
+		  width: 285px;
+		  position: fixed;
+		  z-index: 1;
+		  background-color: #fff;
+		  
+		}
+		
+		.menu ul {
+		  border-top: 1px solid #D7DBDE;
+		  list-style: none;
+		  margin: 0;
+		  padding: 0;
+		  z-index: 2;
+		  background-color: #fff;
+		
+		}
+		
+		.menu li {
+		  border-bottom: 1px solid #D7DBDE;
+		  font-family: 'Open Sans', sans-serif;
+		  line-height: 27px;
+		  padding-bottom: 1px;
+		  padding-left: 20px;
+		  padding-top: 1px;
+		  z-index: 1;
+		  background-color: #fff;
+		}
+		
+		.menu a {
+		  color: #636366;
+		  font-size: 15px;
+		  text-decoration: none;
+		  text-transform: uppercase;
+		  text-align: center;
+		  background-color: #fff;
+		
+		}
+		
+		.icon-close {
+		  cursor: pointer;
+		  padding-right: 10px;
+		  padding-top: 10px;
+		}
+		
+		div.icon-menu {
+		  color: #5a5a5a;
+		  cursor: pointer;
+		  font-family: 'Open Sans', sans-serif;
+		  font-size: 16px;
+		  padding-bottom: 25px;
+		  padding-right: 25px;
+		  padding-top: 25px;
+		  text-decoration: none;
+		  text-transform: uppercase;
+		  float: right;
+		  font-weight: bold;
+		}
+		
+		.icon-menu i {
+		  margin-right: 5px;
+		}
+		
+		div.icon-menu {
+			color: beige;
+		}
+		
+
+		 
+		
+		         
+		 /**JUMBOTRON**/
+		
+		.jumbotron {
+			background-image: url('./images/christmas3.jpg') ;
+		  	height: 450px;
+		  	background-position:center top;
+	    	width: 100%
+			background-repeat: no-repeat;
+			background-size: cover;
+			
+		}
+		
+		
+		
+		.jumbotron.container {
+		  position: static;
+		  top:100px;
+		}
+		
+		.jumbotron h1 {
+		  color: beige;
+		  font-size: 55px;  
+		  font-family: 'Shift', sans-serif;
+		  font-weight: bold;
+		  padding-top: 30px;
+		}
+		
+		.jumbotron p {
+		  font-size: 30px;
+		  color: beige;
+		}
+		
+		/**CLOCK BOX**/
+		
+		.col-sm-2 #clockbox{
+			color:beige !important;
+		}
+		
+		/**ALERT**/
+		  
+		.alertalert-info {
+		  z-index: -1;
+		
+		}
+		
+		                     /**TABLE**/
+		
+		.table {
+		  z-index: -1;
+		}
+	 
+	 </style> 
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+ <!--[if lt IE 9]>
+  <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+<![endif]-->
+  </head>
+
+<body>
+                            
+   
+                          <!-- TABS -->
+
+ <div class="row-fluid">
+ <div class="col-sm-8">                   
+ <ul class="nav nav-tabs">
+        <li class="active"><a href="#">Home</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">SMS <span class="caret"></span></a>
+          <ul class="dropdown-menu" id="d_clip_button">
+                             
+            <li id="copyList1" onClick="CopyLists(this)" 
+            title="Vie nadvishihte kreditnia si limit. Kato vajen za Telenor klient spiraneto Vi e vremenno otlojeno. Molia da napravite plashtane. Telenor">
+            <a href="#" >postpone</a></li>
+         	<li id="copyList2" onClick="CopyLists(this)" 
+         	title="Izhodiashtite Vi obazhdania sa spreni poradi nadvishavane na kreditniya limit. Molya,proverete zadalzheniata si kato naberete *123*1# i platete.Telenor">
+         	<a href="#">bar credit limit</a></li>
+            <li id="copyList3" onClick="CopyLists(this)" 
+            title="Izhodyashtite Vi obazhdania sa spreni. Za proverka na smetka naberete *123# Molya,platete v magazin ili prez my.telenor.bg. Telenor">
+            <a href="#">bar fraud</a></li>
+            <li id="copyList4" onClick="CopyLists(this)" 
+            title="Po precenka na otdela za kredit kontrol, vashiat krediten limit e 20 lv. Moje da bade vazstanoven po vashe jelanie sled 3 plateni navreme fakturi. Telenor">
+            <a href="#">credit limit change</a></li> 
+            <li id="copyList5" onClick="CopyLists(this)"
+            title="Vie imate neplatena faktura. Predstoi spirane. Molja platete. Telenor">
+            <a href="#">garbage warning</a></li> 
+            <li id="copyList6" onClick="CopyLists(this)" 
+            title="Vie imate neplateni zadaljenia po abonamenten nomer *********. Predstoi spirane.Molia, platete. Telenor">
+            <a href="#">garbage warning ba</a></li> 
+            <li id="copyList7" onClick="CopyLists(this)" 
+            title="Telefonat Vi e sprian za neplatena faktura. Molja platete. Telenor">
+            <a href="#">garbage barring</a></li> 
+            <li id="copyList8" onClick="CopyLists(this)" 
+            title="Telefonat Vi e sprian za neplateni zadalzhenia po abonamenten nomer *********. Molia platete.Telenor">
+            <a href="#">garbage barring ba</a></li> 
+            <li id="copyList9" onClick="CopyLists(this)"
+            title="Uvedomiavame Vi, che po slujebnata Vi karta e registrirano visoko potreblenie.Za poveche informaciya se obarnete kam CreditControlSection@telenor.bg. Telenor">
+            <a href="#">staff usage</a></li>
+            <li id="copyList10" onClick="CopyLists(this)"
+            title="Uvedomiavame Vi, che dostignahte limita na bezplatnoto potreblenie po slujebnata si karta.Za poveche informaciya, pishete na CreditControlSection@telenor.bg.">
+            <a href="#">staff limit</a></li>
+            <li id="copyList11" onClick="CopyLists(this)" 
+            title="Your limit for free usage is exceeded. For more information you can contact CreditControlSection@globul.bg. Telenor">
+            <a href="#">staff family</a></li>
+            <li id="copyList12" onClick="CopyLists(this)" 
+            title="Uvedomiavame Vi,che limitat Vi e promenen na *** lv.Telenor">
+            <a href="#">dmss</a></li>
+            <li id="copyList13" onClick="CopyLists(this)" 
+            title="Vie nadvishihte kreditnia si limit. Kato vajen za Telenor klient spiraneto Vi e vremenno otlojeno za *** dni. Molia da napravite plashtane . Telenor">
+            <a href="#">green sms</a></li>
+            <li id="copyList14" onClick="CopyLists(this)"
+            title="Uvedomiavame Vi, che po karta Vi e registrirano visoko potreblenie. Molia da napravite plashtane ot *** lv. Telenor">
+            <a href="#">good companies</a></li>
+          </ul>
+        </li>
+       <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">MEMOS <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li id="copyList15" onClick="CopyLists(this)"
+            title="Not loaded calls/sms for *** lv. (UBE= *** lv.)">
+            <a href="#">Not Loaded</a></li>
+            <li id="copyList16" onClick="CopyLists(this)"
+            title="Limit = *** lv. until 3 paid on time invoices.">
+            <a href="#">Credit Limit Change</a></li>
+            <li id="copyList17" onClick="CopyLists(this)"
+            title="Required deposit-*** lv., until 3 paid on time invoices.">
+            <a href="#">Deposit</a></li>
+            <li id="copyList18" onClick="CopyLists(this)"
+            title="Very high usage for this SIM. Do not unbar until *** lv. paid (current UBE-*** lv.)">
+            <a href="#">Very High Usage</a></li>  
+            <li id="copyList19" onClick="CopyLists(this)" 
+            title="Do not unbar until UBE/OB paid.">
+            <a href="#">UB and OB Paid</a></li>  
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">EMAILS <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+         <!--   <li><a href="mailto:OMC@globul.bg?subject=To%20Bar&amp;cc=Fraud%20Mail;&Body=Dear colleagues,%0AWill you please bar all outgoing calls, GPRS and incoming roaming of the following MSISDN and disconnect the call if there is any:%0A35989xxxxxxx%0A%0AThank you in advance,%0ABR%0ACredit Control">Bar Roaming</a></li>
+            <li><a href="mailto:OMC@globul.bg?subject=To%20Bar&amp;cc=Fraud%20Mail;&Body=Dear colleagues,%0APlease set NAM-1 to the following MSISDN:%0A%0A35989xxxxxxx%0A%0AThank you in advance,%0ABR%0ACredit Control">Bar GPRS</a></li>
+            <li><a href="mailto:OMC@globul.bg?subject=To%20Bar&amp;cc=Fraud%20Mail;&Body=Dear colleagues,%0APlease set OBO-1 to the following MSISDN because of VOIP.%0A%0ABR%0ACredit Control">OBO-1</a></li> -->
+            <li><a href="mailto:Pironkov Ivan Stefanov; Spasova Hristina Tsvetkova?subject=High%20Usage&Body=Company:  %0AMSISDN: %0AUBE: %0AAlarm: %0A%0ABest regards">Report KA</a></li> 
+            <li><a href="mailto:Credit Control Section?subject=High%20Usage&Body= Please bar the following number if a payment of *** lv. was not done until **:** tomorrow." >Good Companies</a></li>
+            <li><a href="mailto:CM Residential Team Leaders?subject=Non%20Active%20with%20GPRS%20Traffic&Body= Pls delete APN Telenor and APN Globul.%0A%0AMSISDN:%0ASR#:%0A%0ABest regards">Bar GPRS</a></li>  
+          </ul>
+        </li>
+          <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">DMS <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li id="copyList20" onClick="CopyLists(this)" 
+            title="Последните 3 фактури не са платени в срок. Да подаде ново заявление след хх.хх.хххх.">
+            <a href="#">Last 3 Paid</a></li> 
+            <li id="copyList21" onClick="CopyLists(this)" 
+            title="За увеличаване на кредитен лимит се подава бланка 60.">
+            <a href="#">Increase</a></li>
+            <li id="copyList22" onClick="CopyLists(this)" 
+            title="За намаляване на кредитен лимит се подава молба в свободен текст.">
+            <a href="#">Decrease</a></li>
+            <li id="copyList23" onClick="CopyLists(this)" 
+            title="Минималният кредитен лимит е 20 лв. за карта, тоест ** лв. за този клиент. Ако клиентът е съгласен, моля коригирайте сумата в молбата.">
+            <a href="#">Min</a></li>
+            <li id="copyList24" onClick="CopyLists(this)"
+            title="Максималният кредитен лимит за този клиент е ** лв. Ако клиентът е съгласен, моля коригирайте сумата в бланката.">
+            <a href="#">Max</a></li>
+            <li id="copyList25" onClick="CopyLists(this)" 
+            title="Клиентът не отговаря на условията за увеличаване на кредитен лимит, поради ниско средномесечно потребление \ поради непланена в срок фактура.">
+            <a href="#">Refuse</a></li> 
+            <li id="copyList26" onClick="CopyLists(this)" 
+            title="Лимитът  може да бъде променен 3 месеца след последната корекция. Да подаде ново заявление след хх.хх.хххх.">
+            <a href="#">After</a></li> 
+            <li id="copyList27" onClick="CopyLists(this)" 
+            title="Можем да предложим лимит от ** лв. Ако клиентът е съгласен, моля коригирайте сумата в бланката.">
+            <a href="#">Propose</a></li> 
+          </ul>
+        </li>
+ </ul>
+ </div>
+
+                       <!-- CLOCK -->
+           
+<div class="col-sm-2"> 
+<div id="clockbox" style="font-size: 16.5px; font-family:'Open Sans', sans-serif; color:#5a5a5a; float: right; padding: 10px; display: block"></div>
+<div id="clockbox"></div>
+</div>
+
+
+                 <!-- LINKS -->
+                        
+     <div class="col-sm-2"> 
+       <div class="icon-menu">
+        <i class="fa fa-bars"></i>
+        Links
+       </div>
+     
+    
+     <div class="menu">
+      
+                <!-- LINKS ICON -->
+      <div class="icon-close">
+        <img src="./images/close.png">
+      </div>
+      
+      
+
+                <!-- LINKS LIST -->
+       <ul>
+        <li><a href="http://ccs.globul.bg/ccs/customer/dossier.jsp" target="_blank">CCS</a></li>
+        <li><a href="https://172.16.227.26/FCS/tree/fraud.html" target="_blank">New Fraud Alarms</a></li>
+        <li><a href="https://cc.bos.globul.bg/CustCare/func/wcs/Login.jsp" target="_blank">CX</a></li>
+        <li><a href="http://172.16.99.177/ecommunications_enu/start.swe" target="_blank">Siebel</a></li>
+        <li><a href="https://bpa.globul.bg/bpa/billing" target="_blank">BPA</a></li>
+        <li><a href="https://ccf.bos.globul.bg/ccf/index.jsp" target="_blank">DMS</a></li>
+        <li><a href="https://172.16.227.26/FCS/reports/file_download_1.jsp" target="_blank">Lost/Stolen</a></li>
+        <li><a href="http://172.16.3.17:7778/SRL/ccs_refresh_log.jsp" target="_blank">CCS Refresh Log</a></li>
+        <li><a href="http://172.16.3.17:7778/SRL/bccs_refresh_log.jsp" target="_blank">BCCS Refresh Log</a></li>
+        <li><a href="https://172.16.227.26/RAS/log_load.jsp" target="_blank">Log Loading Chart</a></li>
+        <li><a href="http://172.16.227.26/RAS/jobs_scale.jsp?dateoffset=0" target="_blank">FRS Refresh Log</a></li>
+        <li><a href="http://anubis/cgi-bin/pmsnew/pms_main.cgi" target="_blank">Anubis</a></li>
+        <li><a href="http://192.168.0.64/acs/last2d.cgi" target="_blank">ATM</a></li>
+        <li><a href="https://interapps.bos.globul.bg/epos/index/index.jsp" target="_blank">Epos</a></li>
+        <li><a href="https://portal.wow2.telenor.com/globul" target="_blank">WoW </a></li>
+        <li><a href="https://hermes-app.globul.bg/HermesSelfServices/Login.aspx?ReturnUrl=%2fhermesselfservices%2fdefault.aspx" target="_blank">Hermes Self Service</a></li>
+        <li><a href="http://nbds.mvr.bg/nbds2/Web2.nsf/fVerification" target="_blank">МВР</a></li>
+        <li><a href="https://inetdec.nra.bg/index.html" target="_blank">НЗОК</a></li>
+        <li><a href="https://public.brra.bg/CheckUps/Default.ra?0" target="_blank">Търговски регистър</a></li>
+        <li><a href="http://portal.globul.bg/sites/projects/roaming/Individual%20Annexes%20%20AA14/Forms/AllItems.aspx" target="_blank">Roaming Anexes</a></li>
+        <li><a href="https://www.numberingplans.com/?page=analysis&sub=phonenr" target="_blank">Destination codes</a></li>
+        <li><a href="http://people.telenor.bg/" target="_blank">People</a></li>
+        <li><a href="http://omng.globul.bg/overtime/calendar.php" target="_blank">Overtime</a></li>
+        <li><a href="file:///\\globul.bg\root\fraud control\FCD_shared\stat" target="_blank">Цесии</a></li>
+      </ul>
+    </div>
+</div>
+</div>
+     
+             
+                    <!-- JUMBOTRON -->
+               
+ <div class="jumbotron">
+         <div class="container">
+     <h1> Credit Control Assistant</h1>
+     <p> Support and Guidelines for Credit Control</p>
+
+         </div>
+ </div>
+                        
+                        
+                     <!-- INFO -->
+                       
+
+        <div id ="myId">
+        <div class= "container">
+       <div class="alert alert-warning fade in">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+  <strong>Info!</strong> It's a billing date today!
+       </div>
+        </div>
+        </div>
+
+
+                  <!--Greetings-->
+  <div class= "container">            
+    <div class="alert alert-success fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+  <strong> Cheers! </strong>  Merry Christmas and Happy 2016 New Year!
+  </div>
+</div> 
+
+                 <!--Warning-->
+<!--    <div class= "container">            
+    <div class="alert alert-warning fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+  <strong> Warning!</strong> Did you receive a missed call from an unknown international number? Be cautious about the "Wangiri call"! 
+  </div>
+</div> 
+
+                         
+            
+
+
+                    <!-- MORNING TASKS -->
+   
+   <div class="container">
+  <div class="row">
+ <div class="col-sm-3">
+  <h4>Morning Tasks</h4>
+  <form role="form">
+      <div class="checkbox">
+      <label><input id="checkbox" type="checkbox">Import payments + UCH</label>
+    </div>
+    <div class="checkbox">
+      <label><input id="checkbox" type="checkbox">Clear</label>
+    </div>
+    <div class="checkbox">
+      <label><input id="checkbox" type="checkbox">Recalculation</label>
+    </div>
+    <div id="MyId2">
+    <div class="checkbox">
+      <label><input id="checkbox" type="checkbox">Garbage Reconnection</label>
+    </div>
+    <div class="checkbox">
+      <label><input id="checkbox" type="checkbox">Garbage Reactivation</label>
+    </div>
+    </div>
+    <div class="checkbox">
+      <label><input id="checkbox" type="checkbox">Garbage Barring Storno</label>
+    </div>
+    <div class="checkbox">
+      <label><input id="checkbox" type="checkbox">Report</label>
+    </div>
+  </form>
+  </div>
+  <div class="col-sm-3">
+   <h4>Evening Tasks</h4>
+  <form role="form">
+	  <div id ="MyId3">
+		  <div class="checkbox">
+		      <label><input id="checkbox" type="checkbox">Garbage Reconection</label>
+		   </div>
+	  </div>
+	   
+      <div class="checkbox">
+      <label><input id="checkbox" type="checkbox">Garbage Reactivation</label>
+    </div>
+
+    <div class="checkbox">
+      <label><input id="checkbox" type="checkbox">Termination</label>
+    </div>
+    
+  </form>
+</div>
+
+    
+                   <!-- TARIFFS TABLE -->
+    
+   <div class="col-sm-6">
+  <h4>Tariffs</h4>
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Zone</th>
+        <th>OC BG, EU and country</th>
+        <th>Outcoming Calls World</th>
+        <th>Incoming Call</th>
+        <th>SMS</th>
+        <th>GPRS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>EU</td>
+        <td>0.37</td>
+        <td>5.00</td>
+        <td>0.09</td>
+        <td>0.11</td>
+        <td>0.39</td>
+      </tr>
+      <tr>
+        <td>Europe</td>
+        <td>2.91</td>
+        <td>5.00</td>
+        <td>1.33</td>
+        <td>0.66</td>
+        <td>12.50</td>
+      </tr>
+      <tr>
+        <td>World</td>
+        <td>5.00</td>
+        <td>5.00</td>
+        <td>1.99</td>
+        <td>0.83</td>
+        <td>20.83</td>
+      </tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+ </div>
+ 
+
+<script src="./bs/js/jquery-1.11.3.min.js"></script>
+<script src="./bs/js/bootstrap.js"></script>
+<script type="text/javascript" src="./zeroclipboard-2.2.0/dist/ZeroClipboard.js"></script>   
+
+<script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+<script type='text/javascript' src="assets/js/css3-mediaqueries.js"></script>  
+
+
+<script type="text/javascript">
+
+//Clock
+
+function GetClock(){
+var d=new Date();
+var nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getYear();
+if(nyear<1000) nyear+=1900;
+var d=new Date();
+var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds();
+if(nmin<=9) nmin="0"+nmin;
+if(nsec<=9) nsec="0"+nsec;
+
+document.getElementById('clockbox').innerHTML=""+(nmonth+1)+"."+ndate+"."+nyear+" "+nhour+":"+nmin+":"+nsec+"";
+}
+
+window.onload=function(){
+GetClock();
+setInterval(GetClock,1000);
+};
+
+//Links
+
+    var main = function() {
+
+  $('.icon-menu').click(function() {
+    $('.menu').animate({
+      right: "0px"
+    }, 200);
+
+    $('body').animate({
+      right: "285px"
+    }, 200);
+  });
+
+
+  $('.icon-close').click(function() {
+    $('.menu').animate({
+      right: "-285px"
+    }, 200);
+
+    $('body').animate({
+      right: "0px"
+    }, 200);
+  });
+};
+
+
+$(document).ready(main);
+
+//Coppy to Clipboard
+
+function CopyLists(myId){
+                           var id = myId.title;
+                           event.returnValue = false;
+                           var bResult = window.clipboardData.setData("Text",id);
+                     }
+
+
+//Info
+
+var n = new Date();
+var d = n.getDate();
+
+$(document).ready(function(){
+    $(window).load(function(){
+    	if(d == 1 || d == 5 || d == 10 || d == 15 || d == 18 || d == 20 || d == 25){
+    	    $("#myId").show();
+    	    
+    	} else {
+    	    $("#myId").hide();
+    	    
+    	}
+    });
+});
+
+//Morning Tasks
+
+var n = new Date();
+var d = n.getDate();
+
+$(document).ready(function() {
+    $(window).load(function() {
+    	if(d == 1 || d == 5 || d == 10 || d == 15 || d == 18 || d == 20 || d == 25) { 
+    	    $("#MyId2").hide();
+    	} else {
+    	    $("#MyId2").show();
+    	    
+    	}
+    });
+});
+
+//Evening Tasks
+
+$(document).ready(function() {
+    $(window).load(function() {
+    	if(d == 31 || d == 4 || d == 9 || d == 14 || d == 17 || d == 19 || d == 24) { 
+    	    $("#MyId3").show();
+    	} else {
+    	    $("#MyId3").hide();
+    	    
+    	}
+    });
+});
+
+</script>
+
+</body>
+</html>
